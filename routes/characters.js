@@ -4,8 +4,9 @@ import {charactersList, findCharacter, showQuotes, findByName, findByQuote, crea
 
 const route = express.Router();
 
-//get: búsquedas
+//En todas las rutas aplicamos autenticación por medio de nuestro middleware verifyToken
 
+//get
 //Búsqueda de todos los personajes
 route.get('/', verifyToken, (req, res) => {
     let result = charactersList();
@@ -27,6 +28,7 @@ route.get('/quotes', verifyToken, (req, res) => {
 });
 
 //Ordenar 
+//Primero se muestran los personajes que aparecen en el episodio piloto.
 route.get('/sort-by-episode', verifyToken, (req, res) => {
     let result = sortByEpisode();
     result.then(value => {
@@ -37,8 +39,10 @@ route.get('/sort-by-episode', verifyToken, (req, res) => {
 })
 
 //Paginado
+//Limitamos la cantidad de documentos a devolver en una query
+//http://localhost:3000/characters/limit-characters?limit=num
 route.get('/limit-characters', verifyToken, (req, res) => {
-    let result = limitCharacters();
+    let result = limitCharacters(req.query.limit);
     result.then(value => {
         res.json(value)
     }).catch(err => {

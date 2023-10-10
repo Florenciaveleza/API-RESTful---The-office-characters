@@ -41,4 +41,14 @@ async function deleteUser(id) {
     return user;
 }
 
-export {userList, findByName, findUser, createUser, updateUser, deleteUser};
+async function limitUsers(num) {
+    let users = await User.find().limit(num);
+    return users;
+}
+
+async function sortByEmail() {
+    let users = await User.find().sort({email: -1})
+    return users;
+}
+
+export {userList, findByName, findUser, createUser, updateUser, deleteUser, limitUsers, sortByEmail};

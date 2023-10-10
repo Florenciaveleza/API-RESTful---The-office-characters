@@ -1,7 +1,6 @@
 import Character from '../models/characters_models.js';
 
-//Funciones
-
+//Buscamos todos los personajes con el status true, por defecto todos tienen true, a menos que especifiquemos lo contrario.
 async function charactersList() {
     let characters = await Character.find({'status': true})
     return characters;
@@ -12,7 +11,7 @@ async function findCharacter(id) {
     return character;
 }
 
-
+//Con esta función mostramos las frases y el nombre, especificando que no nos muestre el id
 async function showQuotes() {
     let characters = await Character.find({},{'quotes': 1, 'name': 1, _id: 0})
     return characters;
@@ -64,14 +63,15 @@ async function filterGender(gender) {
     return character;
 }
 
-//Primero se muestran los personajes que aparecen en el episodio piloto.
+
 async function sortByEpisode() {
     let character = await Character.find().sort({first: -1})
     return character;
 }
 
-async function limitCharacters() {
-    let character = await Character.find().limit(3);
+//Limitamos a que se muestren 3 personajes
+async function limitCharacters(num) {
+    let character = await Character.find().limit(num);
     return character;
 }
 
