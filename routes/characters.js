@@ -40,9 +40,10 @@ route.get('/sort-by-episode', verifyToken, (req, res) => {
 
 //Paginado
 //Limitamos la cantidad de documentos a devolver en una query
+//También en la query incluimos la página actual
 //http://localhost:3000/characters/limit-characters?limit=num
 route.get('/limit-characters', verifyToken, (req, res) => {
-    let result = limitCharacters(req.query.limit);
+    let result = limitCharacters(req.query.page , req.query.limit);
     result.then(value => {
         res.json(value)
     }).catch(err => {

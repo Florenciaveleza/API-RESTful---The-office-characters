@@ -69,9 +69,11 @@ async function sortByEpisode() {
     return character;
 }
 
-//Limitamos a que se muestren 3 personajes
-async function limitCharacters(num) {
-    let character = await Character.find().limit(num);
+//Nos llega por parametro la página actual y la cantidad de personajes a limitar
+//Con la constante skip calculamos la cantidad de elementos a omitir.
+async function limitCharacters(page, limit) {
+    const skip = (page - 1) * limit;
+    let character = await Character.find().limit(limit).skip(skip);
     return character;
 }
 

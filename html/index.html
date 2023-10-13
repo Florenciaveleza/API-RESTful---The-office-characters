@@ -9,19 +9,65 @@
 <body>
     <main>
         <h1>The office API RESTful</h1>
-        <p>Bienvenido a la API de personajes de The office</p>
-
-        <ul>
-            <li><a href="http://localhost:3000/characters/">Lista de personajes</a></li>
-            <li><a href="http://localhost:3000/characters/quotes">Listado de frase</a></li>
-            <li><a href="http://localhost:3000/characters/sort-by-episode">Ordenar resultados según episodio de aparición</a></li>
-            <li><a href="http://localhost:3000/characters/limit-characters">Paginado</a></li>
-            <li><a href="http://localhost:3000/characters/:id">Búsqueda por id</a></li>
-            <li><a href="http://localhost:3000/characters/:name">Búsqueda por nombre</a></li>
-            <li><a href="http://localhost:3000/characters/episodes/:first">Filtro de personajes episodio de aparición</a></li>
-            <li><a href="http://localhost:3000/characters/gender/:gender">Filtro por género</a></li>
-        </ul>
+        <p>Esta documentación te va a mostrar las diferentes rutas para obtener personajes de The office.</p>
     </main>
+    <section class="section">
+        <article class="article">
+            <h2>GET</h2>
+            <p>URL: http://localhost:3000/characters/</p>
+            <p>Esta URL contiene todos los GET que podemos realizar para obtener personajes de distintas maneras.</p>
+            <ul class="padding">
+                <li>Characters: Obtenemos todos los personajes</li>
+                <li>Frases: Obtenemos las frases y quien dijo esa frase</li>
+                <li>ID: Obtenemos un personaje por id</li>
+                <li>Nombre: Obtenemos un personaje por su nombre</li>
+                <li>Frase: Podemos buscar mandando por parametro una frase, lo que nos devuelve quien fue el personaje que dijo esa frase</li>
+            </ul>
+            <code>
+                {
+                    "characters": "http://localhost:3000/characters/",
+                    "frases": "http://localhost:3000/characters/quotes",
+                    "id": "http://localhost:3000/characters/:id",
+                    "nombre": "http://localhost:3000/characters/:name",
+                    "frase": http://localhost:3000/characters/quote/:quotes
+                }
+            </code>
+            <h3 class="mt">Filtros</h3>
+            <p>Además podemos filtrar por episodio de aparición y por género del personaje</p>
+            <code>
+                {
+                    "episodio": "http://localhost:3000/characters/episodes/:first",
+                    "genero": "http://localhost:3000/characters/gender/:gender"
+                }
+            </code>
+            <h2 class="mt">Paginado y ordenamiento de resultados</h2>
+            <p>Tenemos la posibilidad de paginar y ordenar según episodio de aparición</p>
+            <p>En el caso del paginado, enviamos por query la página que vamos a obtener con la cantidad de resultados a devolver</p>
+            <p>http://localhost:3000/characters/limit-characters?page=1&limit=3</p>
+            <code>
+                {
+                    "paginado": "http://localhost:3000/characters/limit-characters",
+                    "orden por episodio": "http://localhost:3000/characters/sort-by-episode"
+                }
+            </code>
+        </article>
+        <article class="article">
+            <div>
+                <h2 class="mt">POST</h2>
+                <p>Para crear personajes, debemos mandar por body <b>name, occupation, first, last, quotes</b></p>
+                <p>Quotes es un array que admite agregar varias frases.</p>
+                <p>URL: http://localhost:3000/characters/</p>
+            </div>
+            <div>
+                <h2 class="mt">PUT</h2>
+                <p>Tenemos la opción de modificar las frases de los personajes, para eso usamos la URL http://localhost:3000/characters/:id</p>
+            </div>
+            <div>
+                <h2 class="mt">DELETE</h2>
+                <p>Para eliminar un personaje usamos la URL http://localhost:3000/characters/:id</p>
+            </div>
+        </article>
+    </section>
     <footer>
         <p>María Florencia Vélez Almeida - 2023 - dwn4ap - Camila Belén Marcos Galbán</p>
     </footer>

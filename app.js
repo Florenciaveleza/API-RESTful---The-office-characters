@@ -24,7 +24,7 @@ app.use('/users', users)
 app.use('/auth', auth)
 app.use('/characters', characters)
 app.get('/', (req, res) => {
-    res.send('hola')
+    res.send('')
 })
 
 const port = process.env.PORT || 3002;

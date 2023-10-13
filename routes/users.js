@@ -60,7 +60,7 @@ route.get('/name/:name', verifyToken, (req, res) => {
 })
 
 //Creación de usuarios
-route.post('/', verifyToken, (req, res) => {
+route.post('/', (req, res) => {
     let body = req.body;
     let result = createUser(body);
     result.then(user => {
