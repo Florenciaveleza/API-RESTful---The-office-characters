@@ -41,9 +41,10 @@ async function deleteUser(id) {
     return user;
 }
 
-async function limitUsers(num) {
-    let users = await User.find().limit(num);
-    return users;
+async function limitUsers(page, limit) {
+    const skip = (page - 1) * limit;
+    let user = await User.find().limit(limit).skip(skip);
+    return user;
 }
 
 async function sortByEmail() {

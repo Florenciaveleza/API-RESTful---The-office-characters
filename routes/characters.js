@@ -13,7 +13,7 @@ route.get('/', verifyToken, (req, res) => {
     result.then(characters => {
         res.json(characters);
     }).catch(err => {
-        res.status(400).json(err);
+        res.status(400).json({err, message: "Hubo un problema al intentar obtener la lista de personajes." });
     })
 });
 
@@ -23,7 +23,7 @@ route.get('/quotes', verifyToken, (req, res) => {
     result.then(value => {
         res.json(value);
     }).catch(err => {
-        res.status(400).json({err})
+        res.status(400).json({err, message: "Se ha producido un error al intentar obtener los nombres de los personajes con sus frases."})
     })
 });
 
@@ -34,20 +34,20 @@ route.get('/sort-by-episode', verifyToken, (req, res) => {
     result.then(value => {
         res.json(value)
     }).catch(err => {
-        res.status(400).json(err)
+        res.status(400).json({err, message: "Se ha producido un error al intentar ordenar personajes."})
     })
 })
 
 //Paginado
 //Limitamos la cantidad de documentos a devolver en una query
 //También en la query incluimos la página actual
-//http://localhost:3000/characters/limit-characters?limit=num
+//http://localhost:3000/characters/limit-characters?page=num&limit=num
 route.get('/limit-characters', verifyToken, (req, res) => {
     let result = limitCharacters(req.query.page , req.query.limit);
     result.then(value => {
         res.json(value)
     }).catch(err => {
-        res.status(400).json(err)
+        res.status(400).json({err, message: "La solicitud de paginación y límite de resultados es incorrecta. Asegúrate de incluir los parámetros 'page' y 'limit' en la consulta y proporcionar valores válidos."})
     })
 });
 
@@ -57,7 +57,7 @@ route.get('/:id', verifyToken, (req, res) => {
     result.then(value => {
         res.json(value);
     }).catch(err => {
-        res.status(400).json({err})
+        res.status(400).json({err, message: "No se encontró el personaje solicitado"})
     })
 });
 
@@ -67,7 +67,7 @@ route.get('/name/:name', verifyToken, (req, res) => {
     result.then(value => {
         res.json(value);
     }).catch(err => {
-        res.status(400).json({err})
+        res.status(400).json({err, message: "No se encontró el personaje solicitado"})
     })
 });
 
@@ -78,7 +78,7 @@ route.get('/quote/:quotes', verifyToken, (req, res) => {
     result.then(value => {
         res.json(value);
     }).catch(err => {
-        res.status(400).json({err})
+        res.status(400).json({err, message: "No se encontró el personaje solicitado"})
     })
 });
 
@@ -90,7 +90,7 @@ route.post('/', verifyToken, (req, res) => {
             character
         })
     }).catch(err => {
-        res.status(400).json(err);
+        res.status(400).json({err, message: "Se ha producido un error al intentar crear un nuevo personaje. Por favor, verificá los datos proporcionados."});
     })
 });
 
@@ -102,7 +102,7 @@ route.put('/:id', verifyToken, (req, res) => {
             value
         })
     }).catch(err => {
-        res.status(400).json(err)
+        res.status(400).json({err, message: "Se ha producido un error al intentar modificar las frases de los personajes. Por favor, verificá los datos proporcionados."})
     })
 });
 
@@ -115,7 +115,7 @@ route.delete('/:id', verifyToken, (req, res) => {
             value
         })
     }).catch(err => {
-        res.status(400).json(err)
+        res.status(400).json({err, message: "El usuario solicitado no existe"})
     })
 });
 
@@ -126,7 +126,7 @@ route.get('/episodes/:first', verifyToken, (req, res) => {
     result.then(value => {
         res.json(value)
     }).catch(err => {
-        res.status(400).json(err)
+        res.status(400).json({err})
     })
 });
 
